@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Stashit</Name>
+  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:v1.0.1-beta.0</Repository>
+  <Registry>https://github.com/stashit-apps/stashit-self-hosted/pkgs/container/stashit-self-hosted</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/stashit-apps/stashit-self-hosted/issues</Support>
+  <Project>https://github.com/stashit-apps/stashit-self-hosted</Project>
+  <Overview>Stashit is a self-hosted file storage and organization system with automatic email archiving, PDF conversion, and powerful search capabilities. Perfect for organizing documents, emails, and files with collections.</Overview>
+  <Category>Cloud: Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8282]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/stashit-apps/stashit-self-hosted/main/unraid-template/stashit.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/stashit-apps/stashit-self-hosted/main/unraid-template/stashit-icon.png</Icon>
+  <ExtraParams>--memory=4G</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled></DateInstalled>
+  <Requires>PostgreSQL 17, Redis 7, Gotenberg 8 (all included)</Requires>
+  <Config Name="Web Port" Target="80" Default="8282" Mode="tcp" Description="Web interface port" Type="Port" Display="always" Required="true" Mask="false">8282</Config>
+  <Config Name="User Files Storage" Target="/app/storage" Default="/mnt/user/stashit" Mode="rw" Description="Path where user files are stored (username/collection/file structure)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/stashit</Config>
+  <Config Name="Database Storage" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/stashit/postgres" Mode="rw" Description="PostgreSQL database storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/postgres</Config>
+  <Config Name="Redis Storage" Target="/data" Default="/mnt/user/appdata/stashit/redis" Mode="rw" Description="Redis cache storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/redis</Config>
+  <Config Name="Database Password" Target="POSTGRES_PASSWORD" Default="" Mode="" Description="PostgreSQL password (required for first run)" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string)" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Session Domain" Target="SESSION_DOMAIN" Default="localhost" Mode="" Description="Domain for cookies (use Tailscale hostname if enabled)" Type="Variable" Display="always" Required="false" Mask="false">localhost</Config>
+  <Config Name="Enable Tailscale" Target="USE_TAILSCALE" Default="true" Mode="" Description="Enable Tailscale networking for secure remote access" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Max File Size" Target="MAX_FILE_SIZE" Default="5GB" Mode="" Description="Maximum upload file size (e.g., 10GB, 500MB)" Type="Variable" Display="always" Required="false" Mask="false">5GB</Config>
+  <Config Name="Allowed Extensions" Target="ALLOWED_EXTENSIONS" Default="*" Mode="" Description="Comma-separated file extensions (e.g., .pdf,.doc,.jpg) or * for all" Type="Variable" Display="advanced" Required="false" Mask="false">*</Config>
+  <Config Name="IMAP Lookback Days" Target="IMAP_LOOKBACK_DAYS" Default="30" Mode="" Description="Number of days to look back when importing emails via auto-import rules" Type="Variable" Display="advanced" Required="false" Mask="false">30</Config>
+  <Config Name="Database Name" Target="POSTGRES_DB" Default="stashit" Mode="" Description="PostgreSQL database name" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
+  <Config Name="Database User" Target="POSTGRES_USER" Default="stashit" Mode="" Description="PostgreSQL username" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
+  <Config Name="Redis Host" Target="REDIS_HOST" Default="redis" Mode="" Description="Redis hostname (internal Docker network)" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
+  <Config Name="BullMQ Redis Host" Target="REDIS_BULLMQ_HOST" Default="redis" Mode="" Description="BullMQ Redis hostname" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
+  <Description>
+Stashit - Self-Hosted File Organization System
+
+Features:
+• Organize files into collections
+• Automatic email archiving via IMAP
+• PDF conversion for Office documents
+• Full-text search across all content
+• Secure access via Tailscale
+• Direct file access through Unraid shares
+
+File Storage Structure:
+Your files are organized as: /mnt/user/stashit/username/collection/filename
+
+Quick Start:
+1. Set a strong database password
+2. Generate a random session secret
+3. Configure your storage path
+4. Enable Tailscale for secure remote access
+
+For detailed setup instructions, visit the project page.
+  </Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8282</HostPort>
+        <ContainerPort>80</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Labels>
+    <Label>
+      <Key>tailscale.enabled</Key>
+      <Value>true</Value>
+    </Label>
+    <Label>
+      <Key>tailscale.hostname</Key>
+      <Value>stashit</Value>
+    </Label>
+  </Labels>
+  <Environment>
+    <Variable>
+      <Name>NODE_ENV</Name>
+      <Value>production</Value>
+    </Variable>
+    <Variable>
+      <Name>STORAGE_PATH</Name>
+      <Value>/app/storage</Value>
+    </Variable>
+    <Variable>
+      <Name>DATABASE_HOST</Name>
+      <Value>localhost</Value>
+    </Variable>
+    <Variable>
+      <Name>DATABASE_PORT</Name>
+      <Value>5432</Value>
+    </Variable>
+    <Variable>
+      <Name>DATABASE_SSL</Name>
+      <Value>false</Value>
+    </Variable>
+    <Variable>
+      <Name>REDIS_PORT</Name>
+      <Value>6379</Value>
+    </Variable>
+    <Variable>
+      <Name>REDIS_BULLMQ_PORT</Name>
+      <Value>6379</Value>
+    </Variable>
+    <Variable>
+      <Name>GOTENBERG_API_URL</Name>
+      <Value>http://localhost:3001</Value>
+    </Variable>
+    <Variable>
+      <Name>PORT</Name>
+      <Value>3000</Value>
+    </Variable>
+  </Environment>
+</Container>
