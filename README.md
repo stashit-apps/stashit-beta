@@ -32,17 +32,26 @@ Check the [main repository releases](https://github.com/stashit-apps/stashit-sel
 
   
 
-### Method 1: Template Repository (Recommended)
+### Method 1: Get Template from Repository (Recommended)
 
-  
+1. SSH into your Unraid server
 
-1. In Unraid, go to **Docker > Add Container**
+2. Install the template with this command
 
-2. Click **Template repositories**
+```bash
+wget -O /boot/config/plugins/dockerMan/templates/stashit.xml https://raw.githubusercontent.com/stashit-apps/stashit-beta/main/unraid-template/stashit.xml
 
-3. Add this URL: `https://github.com/stashit-apps/stashit-beta`
+```
 
-4. Save, then search for "StashIt" and install
+3. In Unraid, go to **Docker > Add Container**
+
+4. From the template dropdown select **Stashit**
+
+5. Add a Database password and Session secret. The session secret should be a random string between 32 and 64 characters long. You can use a password manager to generate this.
+
+6. You can leave the rest of the fields as is unless you want to choose a different share in the **User Files Storage** option.
+
+7. Click **Apply**
 
   
 
