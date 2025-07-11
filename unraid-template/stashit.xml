@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>Stashit</Name>
-  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:v1.0.2-beta.21</Repository>
+  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:v1.0.2-beta.22</Repository>
   <Registry>https://github.com/stashit-apps/stashit-self-hosted/pkgs/container/stashit-self-hosted</Registry>
   <Network>bridge</Network>
   <MyIP/>
@@ -112,6 +112,26 @@ For detailed setup instructions, visit the project page.
     <Variable>
       <Name>PORT</Name>
       <Value>3000</Value>
+    </Variable>
+    <Variable>
+      <Name>STASHIT_API_PORT</Name>
+      <Value>3000</Value>
+    </Variable>
+    <Variable>
+      <Name>STASHIT_API_KEY</Name>
+      <Value>self-hosted-api-key</Value>
+    </Variable>
+    <Variable>
+      <Name>EMAIL_RESET_URL</Name>
+      <Value>http://localhost/reset-password</Value>
+    </Variable>
+    <Variable>
+      <Name>FRONT_END_BASE_URL</Name>
+      <Value>http://localhost</Value>
+    </Variable>
+    <Variable>
+      <Name>FRONTEND_DOWNLOAD_URL</Name>
+      <Value>http://localhost</Value>
     </Variable>
   </Environment>
 </Container>
