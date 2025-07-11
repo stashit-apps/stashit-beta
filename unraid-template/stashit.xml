@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>Stashit</Name>
-  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:v1.0.2-beta.15</Repository>
+  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:v1.0.2-beta.16</Repository>
   <Registry>https://github.com/stashit-apps/stashit-self-hosted/pkgs/container/stashit-self-hosted</Registry>
   <Network>bridge</Network>
   <MyIP/>
@@ -20,11 +20,11 @@
   <DateInstalled></DateInstalled>
   <Requires>PostgreSQL 17, Redis 7, Gotenberg 8 (all included)</Requires>
   <Config Name="Web Port" Target="80" Default="8282" Mode="tcp" Description="Web interface port" Type="Port" Display="always" Required="true" Mask="false">8282</Config>
-  <Config Name="User Files Storage" Target="/app/storage" Default="/mnt/user/stashit" Mode="rw" Description="Path where user files are stored (username/collection/file structure)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/stashit</Config>
+  <Config Name="User Files Storage" Target="/app/storage" Default="/mnt/user/stashit" Mode="rw" Description="Share name where user files are stored as (username/collection/file structure)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/stashit</Config>
   <Config Name="Database Storage" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/stashit/postgres" Mode="rw" Description="PostgreSQL database storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/postgres</Config>
   <Config Name="Redis Storage" Target="/data" Default="/mnt/user/appdata/stashit/redis" Mode="rw" Description="Redis cache storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/redis</Config>
   <Config Name="Database Password" Target="POSTGRES_PASSWORD" Default="" Mode="" Description="PostgreSQL password (required for first run)" Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string)" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string between 32 and 64 characters)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Domain" Target="SESSION_DOMAIN" Default="localhost" Mode="" Description="Domain for cookies (use Tailscale hostname if enabled)" Type="Variable" Display="always" Required="false" Mask="false">localhost</Config>
   <Config Name="Enable Tailscale" Target="USE_TAILSCALE" Default="true" Mode="" Description="Enable Tailscale networking for secure remote access" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
   <Config Name="Max File Size" Target="MAX_FILE_SIZE" Default="5GB" Mode="" Description="Maximum upload file size (e.g., 10GB, 500MB)" Type="Variable" Display="always" Required="false" Mask="false">5GB</Config>
