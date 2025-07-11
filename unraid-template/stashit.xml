@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>Stashit</Name>
-  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:v1.0.2-beta.22</Repository>
+  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:1.0.2-beta.23</Repository>
   <Registry>https://github.com/stashit-apps/stashit-self-hosted/pkgs/container/stashit-self-hosted</Registry>
   <Network>bridge</Network>
   <MyIP/>
