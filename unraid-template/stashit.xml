@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>Stashit</Name>
-  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:1.0.2-beta.27</Repository>
+  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:1.0.2-beta.28</Repository>
   <Registry>https://github.com/stashit-apps/stashit-self-hosted/pkgs/container/stashit-self-hosted</Registry>
   <Network>bridge</Network>
   <MyIP/>
@@ -12,7 +12,7 @@
   <Overview>Stashit is a self-hosted file storage and organization system with automatic email archiving, PDF conversion, and powerful search capabilities. Perfect for organizing documents, emails, and files with collections.</Overview>
   <Category>Cloud: Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:8282]</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/stashit-apps/stashit-self-hosted/main/unraid-template/stashit.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/stashit-apps/stashit-beta/main/unraid-template/stashit.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/stashit-apps/stashit-self-hosted/main/unraid-template/stashit-icon.png</Icon>
   <ExtraParams>--memory=4G</ExtraParams>
   <PostArgs/>
