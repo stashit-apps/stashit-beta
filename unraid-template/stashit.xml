@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>Stashit</Name>
-  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:1.0.2-beta.28</Repository>
+  <Repository>ghcr.io/stashit-apps/stashit-self-hosted:beta</Repository>
   <Registry>https://github.com/stashit-apps/stashit-self-hosted/pkgs/container/stashit-self-hosted</Registry>
   <Network>bridge</Network>
   <MyIP/>
@@ -25,6 +25,7 @@
   <Config Name="Redis Storage" Target="/data" Default="/mnt/user/appdata/stashit/redis" Mode="rw" Description="Redis cache storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/redis</Config>
   <Config Name="Database Password" Target="POSTGRES_PASSWORD" Default="" Mode="" Description="PostgreSQL password (required for first run)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string between 32 and 64 characters)" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Session Cookie Secure" Target="SESSION_COOKIE_SECURE" Default="false" Mode="" Description="Enable secure cookies (requires HTTPS). Set to 'true' only if using reverse proxy with SSL/TLS. Default 'false' works fine for local HTTP access." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="Session Domain" Target="SESSION_DOMAIN" Default="localhost" Mode="" Description="Domain for cookies (use Tailscale hostname if enabled)" Type="Variable" Display="always" Required="false" Mask="false">localhost</Config>
   <Config Name="Enable Tailscale" Target="USE_TAILSCALE" Default="true" Mode="" Description="Enable Tailscale networking for secure remote access" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
   <Config Name="Max File Size" Target="MAX_FILE_SIZE" Default="5GB" Mode="" Description="Maximum upload file size (e.g., 10GB, 500MB)" Type="Variable" Display="always" Required="false" Mask="false">5GB</Config>
@@ -132,6 +133,10 @@ For detailed setup instructions, visit the project page.
     <Variable>
       <Name>FRONTEND_DOWNLOAD_URL</Name>
       <Value>http://localhost</Value>
+    </Variable>
+    <Variable>
+      <Name>SESSION_COOKIE_SECURE</Name>
+      <Value>false</Value>
     </Variable>
   </Environment>
 </Container>
