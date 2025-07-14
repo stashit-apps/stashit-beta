@@ -26,8 +26,7 @@
   <Config Name="Database Password" Target="POSTGRES_PASSWORD" Default="" Mode="" Description="PostgreSQL password (required for first run)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string between 32 and 64 characters)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Cookie Secure" Target="SESSION_COOKIE_SECURE" Default="false" Mode="" Description="Enable secure cookies (requires HTTPS). Set to 'true' only if using reverse proxy with SSL/TLS. Default 'false' works fine for local HTTP access." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
-  <Config Name="Session Domain" Target="SESSION_DOMAIN" Default="localhost" Mode="" Description="Domain for cookies (use Tailscale hostname if enabled)" Type="Variable" Display="always" Required="false" Mask="false">localhost</Config>
-  <Config Name="Enable Tailscale" Target="USE_TAILSCALE" Default="true" Mode="" Description="Enable Tailscale networking for secure remote access" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Session Domain" Target="SESSION_DOMAIN" Default="localhost" Mode="" Description="Domain for cookies" Type="Variable" Display="always" Required="false" Mask="false">localhost</Config>
   <Config Name="Max File Size" Target="MAX_FILE_SIZE" Default="5GB" Mode="" Description="Maximum upload file size (e.g., 10GB, 500MB)" Type="Variable" Display="always" Required="false" Mask="false">5GB</Config>
   <Config Name="Allowed Extensions" Target="ALLOWED_EXTENSIONS" Default="*" Mode="" Description="Comma-separated file extensions (e.g., .pdf,.doc,.jpg) or * for all" Type="Variable" Display="advanced" Required="false" Mask="false">*</Config>
   <Config Name="IMAP Lookback Days" Target="IMAP_LOOKBACK_DAYS" Default="30" Mode="" Description="Number of days to look back when importing emails via auto-import rules" Type="Variable" Display="advanced" Required="false" Mask="false">30</Config>
@@ -43,7 +42,6 @@ Features:
 • Automatic email archiving via IMAP
 • PDF conversion for Office documents
 • Full-text search across all content
-• Secure access via Tailscale
 • Direct file access through Unraid shares
 
 File Storage Structure:
@@ -53,7 +51,6 @@ Quick Start:
 1. Set a strong database password
 2. Generate a random session secret
 3. Configure your storage path
-4. Enable Tailscale for secure remote access
 
 For detailed setup instructions, visit the project page.
   </Description>
@@ -67,16 +64,6 @@ For detailed setup instructions, visit the project page.
       </Port>
     </Publish>
   </Networking>
-  <Labels>
-    <Label>
-      <Key>tailscale.enabled</Key>
-      <Value>true</Value>
-    </Label>
-    <Label>
-      <Key>tailscale.hostname</Key>
-      <Value>stashit</Value>
-    </Label>
-  </Labels>
   <Environment>
     <Variable>
       <Name>NODE_ENV</Name>
