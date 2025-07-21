@@ -27,6 +27,7 @@
   <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string between 32 and 64 characters)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Cookie Secure" Target="SESSION_COOKIE_SECURE" Default="false" Mode="" Description="Enable secure cookies (requires HTTPS). Set to 'true' only if using reverse proxy with SSL/TLS. Default 'false' works fine for local HTTP access." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="Session Domain" Target="SESSION_DOMAIN" Default="localhost" Mode="" Description="Domain for cookies" Type="Variable" Display="always" Required="false" Mask="false">localhost</Config>
+  <Config Name="LLM Encryption Key" Target="STASHIT_ENCRYPTION_KEY" Default="" Mode="" Description="OPTIONAL: 64-character encryption key for LLM API keys. Leave EMPTY to auto-generate a unique key (recommended). Only set manually if you need the same key across container recreations." Type="Variable" Display="always" Required="false" Mask="true"/>
   <Config Name="Max File Size" Target="MAX_FILE_SIZE" Default="5GB" Mode="" Description="Maximum upload file size (e.g., 10GB, 500MB)" Type="Variable" Display="always" Required="false" Mask="false">5GB</Config>
   <Config Name="Allowed Extensions" Target="ALLOWED_EXTENSIONS" Default="*" Mode="" Description="Comma-separated file extensions (e.g., .pdf,.doc,.jpg) or * for all" Type="Variable" Display="advanced" Required="false" Mask="false">*</Config>
   <Config Name="IMAP Lookback Days" Target="IMAP_LOOKBACK_DAYS" Default="30" Mode="" Description="Number of days to look back when importing emails via auto-import rules" Type="Variable" Display="advanced" Required="false" Mask="false">30</Config>
@@ -49,8 +50,13 @@ Your files are organized as: /mnt/user/stashit/username/collection/filename
 
 Quick Start:
 1. Set a strong database password
-2. Generate a random session secret
+2. Generate a random session secret (32-64 characters)
 3. Configure your storage path
+4. Leave LLM Encryption Key empty (auto-generates securely)
+
+Advanced LLM Setup:
+• Access http://[your-ip]:8282/api/llm/encryption/generate-key for a manual key
+• Only set manually if you need persistence across container recreations
 
 For detailed setup instructions, visit the project page.
   </Description>
