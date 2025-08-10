@@ -33,6 +33,7 @@
   <Config Name="IMAP Lookback Days" Target="IMAP_LOOKBACK_DAYS" Default="30" Mode="" Description="Number of days to look back when importing emails via auto-import rules" Type="Variable" Display="advanced" Required="false" Mask="false">30</Config>
   <Config Name="Database Name" Target="POSTGRES_DB" Default="stashit" Mode="" Description="PostgreSQL database name" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
   <Config Name="Database User" Target="POSTGRES_USER" Default="stashit" Mode="" Description="PostgreSQL username" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
+  <Config Name="App Data Directory" Target="STASHIT_DATA_DIR" Default="/app/data" Mode="" Description="Internal data directory for encryption keys and vector database. Only change if you know what you're doing." Type="Variable" Display="advanced" Required="false" Mask="false">/app/data</Config>
   <Config Name="Redis Host" Target="REDIS_HOST" Default="redis" Mode="" Description="Redis hostname (internal Docker network)" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
   <Config Name="BullMQ Redis Host" Target="REDIS_BULLMQ_HOST" Default="redis" Mode="" Description="BullMQ Redis hostname" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
   <Description>
@@ -131,6 +132,10 @@ For detailed setup instructions, visit the project page.
     <Variable>
       <Name>SESSION_COOKIE_SECURE</Name>
       <Value>false</Value>
+    </Variable>
+    <Variable>
+      <Name>STASHIT_DATA_DIR</Name>
+      <Value>/app/data</Value>
     </Variable>
   </Environment>
 </Container>
