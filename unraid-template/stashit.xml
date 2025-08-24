@@ -34,6 +34,7 @@
   <Config Name="Database Name" Target="POSTGRES_DB" Default="stashit" Mode="" Description="PostgreSQL database name" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
   <Config Name="Database User" Target="POSTGRES_USER" Default="stashit" Mode="" Description="PostgreSQL username" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
   <Config Name="App Data Directory" Target="STASHIT_DATA_DIR" Default="/app/data" Mode="" Description="Internal data directory for encryption keys and vector database. Only change if you know what you're doing." Type="Variable" Display="advanced" Required="false" Mask="false">/app/data</Config>
+  <Config Name="Enable Prompt Debug" Target="ENABLE_PROMPT_DEBUG" Default="false" Mode="" Description="Enable debug logging of LLM prompts (WARNING: May expose sensitive email content in logs). Only enable for development/troubleshooting." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="Redis Host" Target="REDIS_HOST" Default="redis" Mode="" Description="Redis hostname (internal Docker network)" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
   <Config Name="BullMQ Redis Host" Target="REDIS_BULLMQ_HOST" Default="redis" Mode="" Description="BullMQ Redis hostname" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
   <Description>
@@ -136,6 +137,10 @@ For detailed setup instructions, visit the project page.
     <Variable>
       <Name>STASHIT_DATA_DIR</Name>
       <Value>/app/data</Value>
+    </Variable>
+    <Variable>
+      <Name>ENABLE_PROMPT_DEBUG</Name>
+      <Value>false</Value>
     </Variable>
   </Environment>
 </Container>
