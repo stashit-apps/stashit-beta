@@ -12,7 +12,7 @@
   <Overview>Stashit is a self-hosted file storage and organization system with automatic email archiving, PDF conversion, and powerful search capabilities. Perfect for organizing documents, emails, and files with collections.</Overview>
   <Category>Cloud: Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:8282]</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/stashit-apps/stashit-beta/main/unraid-template/stashit.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/stashit-apps/stashit-self-hosted/main/unraid-template/stashit.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/stashit-apps/stashit-self-hosted/main/unraid-template/stashit-icon.png</Icon>
   <ExtraParams>--memory=4G</ExtraParams>
   <PostArgs/>
@@ -23,6 +23,8 @@
   <Config Name="User Files Storage" Target="/app/storage" Default="/mnt/user/stashit" Mode="rw" Description="Share name where user files are stored as (username/collection/file structure)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/stashit</Config>
   <Config Name="Database Storage" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/stashit/postgres" Mode="rw" Description="PostgreSQL database storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/postgres</Config>
   <Config Name="Redis Storage" Target="/data" Default="/mnt/user/appdata/stashit/redis" Mode="rw" Description="Redis cache storage (persistent across updates)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/redis</Config>
+  <Config Name="Vector DB Storage" Target="/app/data/lancedb" Default="/mnt/user/appdata/stashit/lancedb" Mode="rw" Description="Persistent LanceDB vector index storage" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/stashit/lancedb</Config>
+  <Config Name="Embeddings Cache" Target="/data/embeddings-cache" Default="/mnt/user/appdata/stashit/embeddings-cache" Mode="rw" Description="Optional cache for locally stored embedding models" Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/stashit/embeddings-cache</Config>
   <Config Name="Database Password" Target="POSTGRES_PASSWORD" Default="" Mode="" Description="PostgreSQL password (required for first run)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Session encryption key (generate a random string between 32 and 64 characters)" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Session Cookie Secure" Target="SESSION_COOKIE_SECURE" Default="false" Mode="" Description="Enable secure cookies (requires HTTPS). Set to 'true' only if using reverse proxy with SSL/TLS. Default 'false' works fine for local HTTP access." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
@@ -35,6 +37,9 @@
   <Config Name="Database User" Target="POSTGRES_USER" Default="stashit" Mode="" Description="PostgreSQL username" Type="Variable" Display="advanced" Required="false" Mask="false">stashit</Config>
   <Config Name="App Data Directory" Target="STASHIT_DATA_DIR" Default="/app/data" Mode="" Description="Internal data directory for encryption keys and vector database. Only change if you know what you're doing." Type="Variable" Display="advanced" Required="false" Mask="false">/app/data</Config>
   <Config Name="Enable Prompt Debug" Target="ENABLE_PROMPT_DEBUG" Default="false" Mode="" Description="Enable debug logging of LLM prompts (WARNING: May expose sensitive email content in logs). Only enable for development/troubleshooting." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Optional License Key" Target="STASHIT_LICENSE_KEY" Default="" Mode="" Description="Paste a purchased license key to skip trial provisioning." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Enable Auto Provision" Target="LICENSING_AUTO_PROVISION" Default="false" Mode="" Description="Enable automatic trial license provisioning (requires internet access). Set to 'true' only if you want automatic trial provisioning from external licensing service." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Licensing Server URL" Target="LICENSING_SERVER_URL" Default="" Mode="" Description="Licensing server URL (leave empty for self-hosted or air-gapped deployments). Only set if using external licensing service." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Redis Host" Target="REDIS_HOST" Default="redis" Mode="" Description="Redis hostname (internal Docker network)" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
   <Config Name="BullMQ Redis Host" Target="REDIS_BULLMQ_HOST" Default="redis" Mode="" Description="BullMQ Redis hostname" Type="Variable" Display="advanced-hide" Required="false" Mask="false">redis</Config>
   <Description>
@@ -141,6 +146,18 @@ For detailed setup instructions, visit the project page.
     <Variable>
       <Name>ENABLE_PROMPT_DEBUG</Name>
       <Value>false</Value>
+    </Variable>
+    <Variable>
+      <Name>LICENSING_AUTO_PROVISION</Name>
+      <Value>false</Value>
+    </Variable>
+    <Variable>
+      <Name>LICENSING_PROVISION_CHANNEL</Name>
+      <Value>unraid</Value>
+    </Variable>
+    <Variable>
+      <Name>LICENSING_SERVER_URL</Name>
+      <Value></Value>
     </Variable>
   </Environment>
 </Container>
